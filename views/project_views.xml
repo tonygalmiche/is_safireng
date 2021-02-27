@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="calculer_marge_actions_server" model="ir.actions.server">
+        <field name="name">Calculer la marge</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="binding_model_id" ref="project.model_project_project"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">
+action = model._calculer_marge_action()
+        </field>
+    </record>
+
+
+    <record id="is_view_task_form2" model="ir.ui.view">
+        <field name="name">is_view_task_form2</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <data>
+                <field name="partner_id" position="after">
+                    <field name="is_montant_commande_fournisseur"/>
+                    <field name="is_montant_commande_client"/>
+                    <field name="is_marge"/>
+                    <field name="is_taux_marge"/>
+                </field>
+            </data>
+        </field>
+    </record>
+
+    <record id="is_view_task_tree2" model="ir.ui.view">
+        <field name="name">is_view_task_tree2</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2" />
+        <field name="arch" type="xml">
+            <data>
+                <field name="partner_id" position="after">
+                    <field name="is_montant_commande_fournisseur" optional="hide"/>
+                    <field name="is_montant_commande_client"      optional="hide"/>
+                    <field name="is_marge"                        optional="hide"/>
+                    <field name="is_taux_marge"                   optional="hide"/>
+                </field>
+            </data>
+        </field>
+    </record>
+
+
+
+    <record id="is_edit_project" model="ir.ui.view">
+        <field name="name">is_edit_project</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <data>
+                <div name="options_active" position="after">
+                    <group>
+                        <field name="is_montant_commande_fournisseur"/>
+                        <field name="is_montant_commande_client"/>
+                        <field name="is_marge"/>
+                        <field name="is_taux_marge"/>
+                    </group>
+                </div>
+                <field name="partner_id" position="after">
+                 </field>
+            </data>
+        </field>
+    </record>
+
+
+
+<!-- 
+
+        <record id="edit_project" model="ir.ui.view">
+            <field name="name">project.project.form</field>
+            <field name="model">project.project</field>
+            <field name="arch" type="xml">
+                <form string="Project" delete="0">
+                    <header>
+                        <button name="%(portal.portal_share_action)d" string="Share" type="action" class="oe_highlight oe_read_only"/>
+                    </header>
+                <sheet string="Project">
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-file-text-o">
+                            <field string="Documents" name="doc_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="action"
+                            name="%(act_project_project_2_project_task_all)d" icon="fa-tasks">
+                            <field string="Tasks In Progress" name="task_count" widget="statinfo" options="{'label_field': 'label_tasks'}"/>
+                        </button>
+                        <button name="action_view_all_rating" type="object" attrs="{'invisible': ['|', ('rating_active', '=', False), ('rating_percentage_satisfaction', '=', -1)]}" class="oe_stat_button oe_percent oe_read_only" icon="fa-smile-o" groups="project.group_project_rating">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="rating_percentage_satisfaction" nolabel="1"/>
+                                    %
+                                </span>
+                                <span class="o_stat_text">
+                                    Customer Satisfaction
+                                </span>
+                            </div>
+                        </button>                            
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Project Name"/>
+                        </h1>
+                        <div name="options_active">
+ -->
+
+
+        <!-- <record id="view_task_form2" model="ir.ui.view">
+            <field name="name">project.task.form</field>
+            <field name="model">project.task</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Task" class="o_form_project_tasks">
+                    <sheet string="Task">
+
+                    <group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="partner_id" class="o_task_customer_field"/>
+                            <field name="partner_email" widget="email" attrs="{'invisible': [('partner_id', '=', False)]}"/>
+
+
+        <record id="view_task_tree2" model="ir.ui.view">
+            <field name="name">project.task.tree</field>
+            <field name="model">project.task</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Tasks" multi_edit="1" sample="1">
+                    <field name="message_needaction" invisible="1" readonly="1"/>
+                    <field name="is_closed" invisible="1" />
+                    <field name="sequence" invisible="1" readonly="1"/>
+                    <field name="name"/>
+                    <field name="project_id" optional="show" readonly="1"/>
+                    <field name="partner_id" optional="hide"/>
+                </tree>
+            </field>
+        </record> -->
+
+
+</odoo>
